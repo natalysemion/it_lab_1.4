@@ -1,0 +1,1 @@
+{"name": "db_new", "tables": [{"name": "t1", "schema": [["name", "str"], ["num", "int"], ["date_b", "date"]], "rows": [["n", 1, "2024-10-12"], ["\u043e", 2, "2024-10-11"]]}, {"name": "t2", "schema": [["name", "str"], ["num", "int"], ["date_b", "date"]], "rows": [["n", 1, "2024-10-12"], ["j", 19, "2024-10-11"]]}, {"name": "t3", "schema": [["date_range", "date"]], "rows": []}]}

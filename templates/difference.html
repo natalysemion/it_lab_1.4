@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difference Between Tables</title>
+</head>
+<body>
+    <h1>Difference Between Tables: {{ table_name_1 }} and {{ table_name_2 }}</h1>
+
+    <h2>Rows only in {{ table_name_1 }}:</h2>
+    <ul>
+        {% for row in diff_only_in_1 %}
+            <li>{{ row }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Rows only in {{ table_name_2 }}:</h2>
+    <ul>
+        {% for row in diff_only_in_2 %}
+            <li>{{ row }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>

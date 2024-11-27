@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Table</title>
+</head>
+<body>
+    <h1>Table: {{ table.name }}</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        {% for field, field_type in table.schema %}
+            <label>{{ field }}:</label>
+            {% if field_type == 'DateInterval' %}
+                <label for="start_date">Start Date:</label>
+                <input type="date" name="row_data" required>
+                <label for="end_date">End Date:</label>
+                <input type="date" name="row_data" required>
+            {% else %}
+                <input type="text" name="row_data" required>
+            {% endif %}
+            <br>
+        {% endfor %}
+        <input type="submit" value="Add Row">
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                {% for field, field_type in table.schema %}
+                    <th>{{ field }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table.rows %}
+            <tr>
+                {% for value in row %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+                <td>
+                    <form action="{{ url_for('edit_row', table_name=table.name, row_index=loop.index0) }}" method="POST">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="{{ url_for('delete_row', table_name=table.name, row_index=loop.index0) }}" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{{ url_for('manage_table') }}">Back to Manage Tables</a>
+</body>
+</html>

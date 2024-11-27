@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Row</title>
+</head>
+<body>
+    <h1>Edit Row in Table: {{ table.name }}</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        {% for field, field_type in table.schema %}
+            <label>{{ field }}:</label>
+            <input type="text" name="row_data" value="{{ table.rows[row_index][loop.index0] }}">
+            <br>
+        {% endfor %}
+        <input type="submit" value="Update Row">
+    </form>
+
+    <br>
+    <a href="{{ url_for('view_table', table_name=table.name) }}">Back to Table</a>
+</body>
+</html>

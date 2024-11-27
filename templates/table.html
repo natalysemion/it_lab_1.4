@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ table.name }} - Table</title>
+</head>
+<body>
+    <h1>Table: {{ table.name }}</h1>
+
+    <h2>Schema: {{ table.schema }}</h2>
+
+    <h3>Rows:</h3>
+    <ul>
+        {% for row in table.rows %}
+            <li>
+                {{ row }}
+                <!-- Редагування рядка -->
+                <form action="{{ url_for('edit_row', table_name=table.name, row_index=loop.index0) }}" method="POST">
+                    {% for field in table.schema %}
+                        <input type="text" name="row_data" value="{{ row[loop.index0] }}" required>
+                    {% endfor %}
+                    <button type="submit">Edit Row</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <form action="{{ url_for('add_row', table_name=table.name) }}" method="POST">
+        {% for field in table.schema %}
+            <input type="text" name="row_data" placeholder="{{ field }}" required>
+        {% endfor %}
+        <button type="submit">Add Row</button>
+    </form>
+
+    <a href="{{ url_for('index') }}">Back to Home</a>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

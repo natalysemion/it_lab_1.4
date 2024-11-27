@@ -1,0 +1,1 @@
+{"t1": {"name": "t1", "schema": ["name:str", " num:int", " date_b:date"], "rows": [["n", "1", "2024-10-12"]]}, "t2": {"name": "t2", "schema": ["name:str", " num:int", " date_b:date"], "rows": []}, "t3": {"schema": {"name:str, num:int, date_b:date": "integer"}, "rows": [{"name:str, num:int, date_b:date": 2}]}, "t4": {"schema": {"date_range": "dateInvl"}, "rows": []}}
